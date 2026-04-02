@@ -1,0 +1,39 @@
+{
+  "name": "etapa1_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "tsx watch ./src/server.ts",
+    "start:prod": "node build/server.js",
+    "build": "tsup",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "lint:fix": "biome check --write ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@biomejs/biome": "2.4.10",
+    "@fastify/jwt": "10.0.0",
+    "@types/bcryptjs": "2.4.6",
+    "@types/node": "25.3.0",
+    "@types/pg": "8.16.0",
+    "prettier": "3.8.1",
+    "prisma": "7.4.1",
+    "tsup": "8.5.1",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "7.4.1",
+    "@prisma/client": "7.4.1",
+    "bcryptjs": "3.0.3",
+    "dotenv": "17.3.1",
+    "fastify": "5.7.4",
+    "pg": "8.18.0",
+    "zod": "4.3.6"
+  }
+}
