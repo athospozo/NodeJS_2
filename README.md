@@ -1,6 +1,6 @@
 # Repositório Segunda Semana Node.Js
 
-> Aqui está contida uma API que utiliza das tecnologias Node.Js, Prisma, Fastify e Docker.
+> Aqui está contida uma API desenvolvida para a etapa de treinamento da IN Junior, que utiliza das tecnologias Node.Js, Prisma, Fastify e Docker.
 
 ## A API:
 * A API consiste em um Schema com três modelos: Usuário, Post e Like. Sendo estes modelos interconectados.
