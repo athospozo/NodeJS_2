@@ -4,3 +4,4 @@ build/
 /src/@types/prisma
 endpoint.rest
 AulasBackPostman.json
+postman_collection.json

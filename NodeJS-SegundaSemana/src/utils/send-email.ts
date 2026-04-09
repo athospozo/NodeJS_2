@@ -35,7 +35,7 @@ export async function sendEmail({
       subject,
       text: message,
       html,
-      ...(attachments ? { attachments: attachments! } : {}),
+      ...(attachments ? { attachments: attachments } : {}),
     })
 
     logger.info({ sentTo: to, messageId: info.messageId }, 'Message sent!')
