@@ -1,5 +1,5 @@
 import type { Prisma } from '@/@types/prisma/client.js'
-import { prisma } from '@/libs/prisma.js'
+import { prisma } from '@/lib/prisma.js'
 import type { LikesRepository } from '../likes-repository.js'
 
 export class PrismaLikesRepository implements LikesRepository {

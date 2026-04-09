@@ -27,6 +27,9 @@ model Usuario {
   passwordHash String @map("password_hash")
   photo        String @default("")
 
+  token          String?    @unique
+  tokenExpiresAt DateTime?  @map("token_expires_at")
+  
   posts       Post[]
   comentarios Comentario[]
   likes       Like[]

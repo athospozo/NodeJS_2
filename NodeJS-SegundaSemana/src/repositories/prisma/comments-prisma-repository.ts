@@ -1,5 +1,5 @@
 import type { Prisma } from '@/@types/prisma/client.js'
-import { prisma } from '@/libs/prisma.js'
+import { prisma } from '@/lib/prisma.js'
 import type { CommentsRepository } from '../comments-repository.js'
 
 export class PrismaCommentsRepository implements CommentsRepository {
