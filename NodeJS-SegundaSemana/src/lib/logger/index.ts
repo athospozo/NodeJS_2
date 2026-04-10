@@ -1,8 +1,11 @@
-import pino, { multistream, type StreamEntry, type LoggerOptions } from 'pino'
-import { env } from '../../env/index.js'
 import { AsyncLocalStorage } from 'node:async_hooks'
+import pino, { type LoggerOptions, multistream, type StreamEntry } from 'pino'
+import { env } from '../../env/index.js'
 
-const asyncLocalStorage = new AsyncLocalStorage<{ requestId: string; userId?: string }>()
+const asyncLocalStorage = new AsyncLocalStorage<{
+  requestId: string
+  userId?: string
+}>()
 
 export function getRequestId() {
   return asyncLocalStorage.getStore()?.requestId
@@ -58,4 +61,6 @@ export const loggerConfig: LoggerOptions = isDev
     }
   : baseConfig
 
-export const logger = isDev ? pino(loggerConfig) : pino(baseConfig, multistream(prodStreams))
+export const logger = isDev
+  ? pino(loggerConfig)
+  : pino(baseConfig, multistream(prodStreams))

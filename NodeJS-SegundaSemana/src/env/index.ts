@@ -6,13 +6,15 @@ const envSchema = z.object({
     .enum(['development', 'production', 'test'])
     .default('development'),
 
-  LOG_LEVEL: z.enum(['info', 'debug', 'warn', 'error', 'trace']).default('info'),
-  
+  LOG_LEVEL: z
+    .enum(['info', 'debug', 'warn', 'error', 'trace'])
+    .default('info'),
+
   PORT: z.coerce.number().int().min(1024).max(65535).default(3333),
   HOST: z.string().default('0.0.0.0'),
 
   DATABASE_URL: z.string(),
-  
+
   HASH_SALT_ROUNDS: z.coerce.number().default(10),
   JWT_SECRET: z.string(),
 

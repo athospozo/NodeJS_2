@@ -1,8 +1,8 @@
+import { randomBytes } from 'node:crypto'
 import z from 'zod'
 import type { Usuario } from '@/@types/prisma/client.js'
 import type { UsersRepository } from '@/repositories/users-repository.js'
 import { UserNotFoundForPasswordResetError } from '../errors/user-not-found-for-password-reset-error.js'
-import { randomBytes } from 'crypto'
 
 interface ForgotPasswordUseCaseRequest {
   login: string
@@ -19,7 +19,9 @@ const TOKEN_LENGTH = 32
 export class ForgotPasswordUseCase {
   constructor(private usersRepository: UsersRepository) {}
 
-  async execute({ login }: ForgotPasswordUseCaseRequest): Promise<ForgotPasswordUseCaseResponse> {
+  async execute({
+    login,
+  }: ForgotPasswordUseCaseRequest): Promise<ForgotPasswordUseCaseResponse> {
     let userExists: Usuario | null = null
 
     if (z.string().email().safeParse(login).success) {
