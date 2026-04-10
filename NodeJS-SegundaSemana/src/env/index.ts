@@ -24,6 +24,8 @@ const envSchema = z.object({
   SMTP_PORT: z.coerce.number(),
   SMTP_HOST: z.string().min(1),
   SMTP_SECURE: z.enum(['true', 'false']).transform((val) => val === 'true'),
+
+  CRON_SCHEDULE: z.string().default('0 10 * * *'),
 })
 
 const _env = envSchema.safeParse(process.env)

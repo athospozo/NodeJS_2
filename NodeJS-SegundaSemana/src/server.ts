@@ -1,6 +1,6 @@
 import { app } from './app.js'
 import { env } from './env/index.js'
-import { enviarEmailsDestaqueJob } from './jobs/emailMostLikedPost24hours.js'
+import { enviarEmailsDestaqueJob } from './jobs/email-most-liked-post-24h.js'
 
 const host = env.HOST
 const port = env.PORT
