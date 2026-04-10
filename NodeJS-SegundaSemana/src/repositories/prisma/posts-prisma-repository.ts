@@ -37,7 +37,6 @@ export class PrismaPostsRepository implements PostsRepository {
   }
 
   async findMostLikedPostsFromUser(idUser: number, tempoAnalise: Date) {
-
     return await prisma.post.findFirst({
       where: {
         autorId: idUser,
@@ -47,15 +46,15 @@ export class PrismaPostsRepository implements PostsRepository {
       },
       orderBy: {
         likes: {
-          _count: 'desc', 
-        }
+          _count: 'desc',
+        },
       },
-  
+
       include: {
         _count: {
-          select: { likes: true }
-        }
-      }
+          select: { likes: true },
+        },
+      },
     })
   }
 

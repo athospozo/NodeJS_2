@@ -1,4 +1,8 @@
-export function mostLikedPostHtmlTemplate(userName: string, likes: number, postTitle: string) {
+export function mostLikedPostHtmlTemplate(
+  userName: string,
+  likes: number,
+  postTitle: string,
+) {
   return `
     <div style="font-family: Arial, sans-serif; color: #222;">
       <h2>Olá, ${userName}!</h2>

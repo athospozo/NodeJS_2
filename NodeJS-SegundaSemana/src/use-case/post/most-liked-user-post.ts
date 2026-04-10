@@ -1,6 +1,6 @@
+import type { PostComLikes } from '@/@types/payloads/post.js'
 import type { PostsRepository } from '@/repositories/posts-repository.js'
 import type { UsersRepository } from '@/repositories/users-repository.js'
-import type { PostComLikes } from '@/@types/payloads/post.js'
 
 type GetPostUseCaseResponse = {
   post: PostComLikes
@@ -11,13 +11,12 @@ type GetPostUseCaseResponse = {
    e retorna seu post mais curtido nas últimas 24 horas, caso não exista ela não retorna nada */
 
 export class MostLikedUserPost {
-
-  constructor(private postsRepository: PostsRepository,
-    private usersRepository: UsersRepository
+  constructor(
+    private postsRepository: PostsRepository,
+    private usersRepository: UsersRepository,
   ) {}
 
   async execute(publicUserId: string): Promise<GetPostUseCaseResponse | null> {
-    
     const tempoAnalise = new Date(Date.now() - 24 * 60 * 60 * 1000)
 
     const user = await this.usersRepository.findBy({ publicId: publicUserId })
@@ -26,7 +25,10 @@ export class MostLikedUserPost {
       return null
     }
 
-    const post = await this.postsRepository.findMostLikedPostsFromUser(user.id, tempoAnalise)
+    const post = await this.postsRepository.findMostLikedPostsFromUser(
+      user.id,
+      tempoAnalise,
+    )
 
     if (!post) {
       return null

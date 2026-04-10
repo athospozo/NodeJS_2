@@ -1,4 +1,8 @@
-export function mostLikedPostTextTemplate(userName: string, likes: number, postTitle: string) {
+export function mostLikedPostTextTemplate(
+  userName: string,
+  likes: number,
+  postTitle: string,
+) {
   return `
 Olá, ${userName}!
 

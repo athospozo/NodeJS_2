@@ -3,10 +3,12 @@ import { PrismaUsersRepository } from '@/repositories/prisma/users-prisma-reposi
 import { MostLikedUserPost } from '@/use-case/post/most-liked-user-post.js'
 
 export function makeReadMostLikedUserPostUseCase() {
-
   const postsRepository = new PrismaPostsRepository()
   const usersRepository = new PrismaUsersRepository()
-  const mostLikedUserPostUseCase = new MostLikedUserPost(postsRepository, usersRepository)
+  const mostLikedUserPostUseCase = new MostLikedUserPost(
+    postsRepository,
+    usersRepository,
+  )
 
   return mostLikedUserPostUseCase
 }
