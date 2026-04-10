@@ -1,4 +1,5 @@
 import type { Comentario, Like, Post, Prisma } from '@/@types/prisma/client.js'
+import type { PostComLikes } from '@/@types/payloads/post.js'
 
 export interface PostsRepository {
   create(data: Prisma.PostUncheckedCreateInput): Promise<Post>
@@ -7,6 +8,7 @@ export interface PostsRepository {
   update(id: number, data: Prisma.PostUpdateInput): Promise<Post>
   delete(id: number): Promise<Post>
   findAll(): Promise<Post[] | null>
+  findMostLikedPostsFromUser(idUser: number, tempoAnalise: Date): Promise<PostComLikes | null>
   FindFromUser(IdUser: number): Promise<Post[] | null>
   findLikes(id: number): Promise<Like[] | null>
   findComments(id: number): Promise<Comentario[] | null>

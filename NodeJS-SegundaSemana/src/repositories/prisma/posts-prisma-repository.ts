@@ -36,6 +36,29 @@ export class PrismaPostsRepository implements PostsRepository {
     return await prisma.post.findMany()
   }
 
+  async findMostLikedPostsFromUser(idUser: number, tempoAnalise: Date) {
+
+    return await prisma.post.findFirst({
+      where: {
+        autorId: idUser,
+        createdAt: {
+          gte: tempoAnalise,
+        },
+      },
+      orderBy: {
+        likes: {
+          _count: 'desc', 
+        }
+      },
+  
+      include: {
+        _count: {
+          select: { likes: true }
+        }
+      }
+    })
+  }
+
   async FindFromUser(IdUser: number) {
     return await prisma.post.findMany({
       where: {
