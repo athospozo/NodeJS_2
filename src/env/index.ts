@@ -18,9 +18,14 @@ const envSchema = z.object({
   HASH_SALT_ROUNDS: z.coerce.number().default(10),
   JWT_SECRET: z.string(),
 
+  // Redis
+  REDIS_HOST: z.string().default('127.0.0.1'),
+  REDIS_PORT: z.coerce.number().default(6379),
+  REDIS_PASSWORD: z.string(),
+
   // SMTP
   SMTP_EMAIL: z.email(),
-  SMTP_PASSWORD: z.string().min(1),
+  SMTP_PASSWORD: z.string(),
   SMTP_PORT: z.coerce.number(),
   SMTP_HOST: z.string().min(1),
   SMTP_SECURE: z.enum(['true', 'false']).transform((val) => val === 'true'),

@@ -17,6 +17,10 @@ export async function ReadCommentLikes(
     const readCommentLikesUseCase = makeReadCommentLikesUseCase()
     const likes = await readCommentLikesUseCase.execute(id)
 
+    if (!likes) {
+      return reply.status(404).send({ message: 'Like nao encontrado' })
+    }
+
     return reply.status(200).send({
       message: 'Likes do comentario acessados com sucesso',
       likes: LikePresenter.toHTTP(likes),

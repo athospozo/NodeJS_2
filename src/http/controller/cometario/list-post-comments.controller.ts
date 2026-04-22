@@ -18,6 +18,10 @@ export async function readPostComments(
     const readPostCommentsUseCase = makeReadPostCommentsUseCase()
     const comentarios = await readPostCommentsUseCase.execute(id)
 
+    if (!comentarios) {
+      return reply.status(404).send({ message: 'Comentarios nao encontrados' })
+    }
+
     return reply.status(200).send({
       message: 'Comentários do post alcançados com sucesso',
       comentario: CommentPresenter.toHTTP(comentarios),

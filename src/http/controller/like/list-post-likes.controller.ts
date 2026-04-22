@@ -17,6 +17,10 @@ export async function ReadPostLikes(
     const readPostLikes = makeReadPostLikesUseCase()
     const likes = await readPostLikes.execute(id)
 
+    if (!likes) {
+      return reply.status(404).send({ message: 'Like nao encontrado' })
+    }
+
     return reply.status(200).send({
       message: 'Likes do post acessados com sucesso',
       likes: LikePresenter.toHTTP(likes),
