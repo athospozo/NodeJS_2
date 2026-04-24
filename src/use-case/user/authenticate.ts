@@ -3,6 +3,13 @@ import type { Usuario } from '@/@types/prisma/index.js'
 import type { UsersRepository } from '@/repositories/users-repository.js'
 import { invalidCredentialsError } from '../errors/invalid-credentials-error.js'
 
+export interface HashProvider {
+  compare(plainText: string, hash: string): Promise<boolean>
+}
+
+export interface JwtProvider {
+  generate(userId: string): Promise<string> | string
+}
 interface AuthenticateUserUseCaseRequest {
   login: string
   password: string
@@ -10,10 +17,15 @@ interface AuthenticateUserUseCaseRequest {
 
 type AuthenticateUserUseCaseResponse = {
   user: Usuario
+  token: string
 }
 
 export class AuthenticateUserUseCase {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(
+    private usersRepository: UsersRepository,
+    private hashProvider: HashProvider,
+    private jwtProvider: JwtProvider,
+  ) {}
 
   async execute({
     login,
@@ -25,12 +37,20 @@ export class AuthenticateUserUseCase {
       throw new invalidCredentialsError()
     }
 
-    const passwordMatch = await compare(password, user.passwordHash)
+    const passwordMatch = await this.hashProvider.compare(
+      password,
+      user.passwordHash,
+    )
 
     if (!passwordMatch) {
       throw new invalidCredentialsError()
     }
 
-    return { user }
+    const token = await this.jwtProvider.generate({
+      sub: user.publicId,
+      role: user.role,
+    })
+
+    return { user, token }
   }
 }

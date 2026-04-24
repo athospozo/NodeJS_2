@@ -23,18 +23,10 @@ export async function authenticate(
     }
 
     const authenticateUserUseCase = makeAuthenticateUseCase()
-    const { user } = await authenticateUserUseCase.execute({
+    const { user, token } = await authenticateUserUseCase.execute({
       login: email,
       password,
     })
-
-    const token = await reply.jwtSign(
-      {
-        sub: user.publicId,
-        role: user.role,
-      },
-      { expiresIn: '1d' },
-    )
 
     return reply.status(201).send({
       message: 'Usuário autenticado com sucesso',
